@@ -1,2 +1,0 @@
-# VocabulaireAndroid
-Android client.
