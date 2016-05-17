@@ -27,7 +27,7 @@ public class RequestController {
     private static Gson gson = new Gson();
     public static final String DOMEN = "http://qubular.org";
 
-    public static void getEntryById(Context context,String id){
+    public static void getAllEntries(Context context){
         String url =  DOMEN + "/api/entries/" + id;
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(url, new Response.Listener<JSONObject>() {
