@@ -28,7 +28,7 @@ public class RequestController {
     public static final String DOMEN = "http://qubular.org";
 
     public static void getAllEntries(Context context){
-        String url =  DOMEN + "/api/entries/" + id;
+        String url =  DOMEN + "/api/entries/";
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(url, new Response.Listener<JSONObject>() {
             @Override
@@ -47,5 +47,27 @@ public class RequestController {
         });
 
         VolleyController.getInstance(context).addToRequestQueue(jsonArrayRequest);
+    }
+
+    public static void getEntryById(Context context,String id){
+        String url = DOMEN + "/api/entries/" + id;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                if (response == null) {
+                    //TODO
+                }
+
+                Entry entry = gson.fromJson(response.toString(),Entry.class);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("ERRORRESPONSE",error.getMessage());
+            }
+        });
+
+        VolleyController.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 }
