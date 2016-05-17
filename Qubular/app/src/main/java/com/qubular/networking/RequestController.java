@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import General.Entry;
+import General.Vocabulary;
 
 /**
  * Created by sentosh1ne on 16.05.2016.
@@ -34,8 +35,8 @@ public class RequestController {
             public void onResponse(JSONObject response) {
                 if (response != null){} //TODO Request check
                 Log.i("RESPONDED",response.toString());
-                Entry entry  = gson.fromJson(response.toString(),Entry.class);
-                Log.i("ENTRYYO",entry.toString());
+                Vocabulary vocabulary = gson.fromJson(response.toString(),Vocabulary.class);
+                Log.i("ENTRYYO",vocabulary.toString());
 
             }
         }, new Response.ErrorListener() {
