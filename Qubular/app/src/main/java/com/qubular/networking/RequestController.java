@@ -8,10 +8,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,10 +29,10 @@ import General.Vocabulary;
  */
 public class RequestController {
 
-    private static Gson gson = new Gson();
+    public static Gson gson = new Gson();
     public static final String DOMEN = "http://qubular.org";
 
-    public static void getAllEntries(Context context){
+    public static void getAllEntries(final Context context){
         String url =  DOMEN + "/api/entries/";
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(url, new Response.Listener<JSONObject>() {
@@ -36,7 +41,23 @@ public class RequestController {
                 if (response != null){} //TODO Request check
                 Log.i("RESPONDED",response.toString());
                 Vocabulary vocabulary = gson.fromJson(response.toString(),Vocabulary.class);
+                try {
+                    try (Writer writer = new FileWriter(context.getFilesDir() + "entries.json")) {
+                        Gson localg = new GsonBuilder().create();
+                        localg.toJson(vocabulary, writer);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Log.i("ENTRYYO",vocabulary.toString());
+
+                try {
+                    Entry entry = LocalStorageRequestController.getEntry(context,1);
+                    Log.i("FOUNDINFILE",String.valueOf(entry.id));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
 
             }
         }, new Response.ErrorListener() {
