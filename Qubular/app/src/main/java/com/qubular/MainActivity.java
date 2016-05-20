@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -12,14 +13,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.qubular.adapters.WordSearchAdapter;
 import com.qubular.networking.LocalStorageRequestController;
 import com.qubular.networking.RequestController;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import General.Entry;
+import General.Vocabulary;
 import Lexeme.ForeignLexeme;
 import Lexeme.NativeLexeme;
 
@@ -27,6 +31,7 @@ import Lexeme.NativeLexeme;
 public class MainActivity extends AppCompatActivity {
 
     TextView explanation, word, synonims;
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        explanation = (TextView) findViewById(R.id.explanation);
-        word = (TextView) findViewById(R.id.wordTitle);
-        synonims = (TextView) findViewById(R.id.synonims);
+//        explanation = (TextView) findViewById(R.id.explanation);
+//        word = (TextView) findViewById(R.id.wordTitle);
+//        synonims = (TextView) findViewById(R.id.synonims);
+        recyclerView = (RecyclerView) findViewById(R.id.main_recview);
         RequestController.getAllEntries(getApplicationContext());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -46,20 +52,30 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
                 try {
                     Entry e = LocalStorageRequestController.getEntry(getApplicationContext(),1);
-                    word.setText(e.foreign.lemma.getString());
+//                    word.setText(e.foreign.lemma.getString());
                     String synons = "(";
                     for (NativeLexeme s : e.natives){
                         synons += s.lemma.getString() + ",";
                     }
                     synons += ")";
 
-                    synonims.setText(synons);
+                   // synonims.setText(synons);
                     String str = "";
                     //for (Morpheme m: e.foreign.forms)
 
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
                 }
+
+                Vocabulary voc = null;
+                try {
+                    voc = LocalStorageRequestController.getVocabulary(getApplicationContext());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                WordSearchAdapter.setupWordRecycler(recyclerView, Arrays.asList(voc.getEntries()),R.layout.wordcardlayout,getApplicationContext());
+
+
             }
         });
     }

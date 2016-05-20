@@ -1,6 +1,9 @@
 package com.qubular.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +39,17 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // TODO creation logic
+        // TODO creation logic and on touch event + change layout itself
+        holder.wordText.setText(entries.get(position).foreign.lemma.toString());
+
+    }
+
+    public static void setupWordRecycler(final RecyclerView recyclerView,List<Entry> entries,int layout,Context ctx){
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(new WordSearchAdapter(entries, layout));
+        recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
     }
 
     @Override

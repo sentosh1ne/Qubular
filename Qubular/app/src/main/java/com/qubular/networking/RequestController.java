@@ -55,7 +55,7 @@ public class RequestController {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("ERRORRESPONSE",error.getMessage());
+                Log.i("ERRORRESPONSE",error.getMessage().toString());
             }
         });
 
@@ -77,7 +77,7 @@ public class RequestController {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("ERRORRESPONSE",error.getMessage());
+                Log.i("ERRORRESPONSE",error.getMessage().toString());
             }
         });
 
