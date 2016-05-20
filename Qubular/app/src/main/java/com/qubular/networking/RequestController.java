@@ -51,14 +51,6 @@ public class RequestController {
                 }
                 Log.i("ENTRYYO",vocabulary.toString());
 
-                try {
-                    Entry entry = LocalStorageRequestController.getEntry(context,1);
-                    Log.i("FOUNDINFILE",String.valueOf(entry.id));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-
             }
         }, new Response.ErrorListener() {
             @Override

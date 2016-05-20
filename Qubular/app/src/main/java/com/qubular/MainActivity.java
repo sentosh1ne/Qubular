@@ -10,16 +10,23 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.qubular.networking.LocalStorageRequestController;
 import com.qubular.networking.RequestController;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 import General.Entry;
+import Lexeme.ForeignLexeme;
+import Lexeme.NativeLexeme;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    TextView explanation, word, synonims;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        explanation = (TextView) findViewById(R.id.explanation);
+        word = (TextView) findViewById(R.id.wordTitle);
+        synonims = (TextView) findViewById(R.id.synonims);
         RequestController.getAllEntries(getApplicationContext());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +44,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                try {
+                    Entry e = LocalStorageRequestController.getEntry(getApplicationContext(),1);
+                    word.setText(e.foreign.lemma.getString());
+                    String synons = "(";
+                    for (NativeLexeme s : e.natives){
+                        synons += s.lemma.getString() + ",";
+                    }
+                    synons += ")";
+
+                    synonims.setText(synons);
+                    String str = "";
+                    //for (Morpheme m: e.foreign.forms)
+
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
     }
