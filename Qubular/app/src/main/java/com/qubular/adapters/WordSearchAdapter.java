@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.qubular.R;
+import com.qubular.util.DividerItemDecoration;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
         recyclerView.setAdapter(new WordSearchAdapter(entries, layout));
         recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        recyclerView.addItemDecoration(new DividerItemDecoration(ctx,R.drawable.divider));
     }
 
     @Override
