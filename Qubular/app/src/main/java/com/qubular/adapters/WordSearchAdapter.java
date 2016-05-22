@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qubular.R;
@@ -25,6 +28,7 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
     List<Entry> entries;
     int itemLayout;
     Context context;
+    int lastPosition = -1;
 
     public WordSearchAdapter(List<Entry> entries, int itemLayout) {
         this.entries = entries;
@@ -42,6 +46,7 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         // TODO creation logic and on touch event + change layout itself
         holder.wordText.setText(entries.get(position).foreign.lemma.toString());
+        setAnimation(holder.container,position);
 
     }
 
@@ -61,9 +66,22 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView wordText;
+        RelativeLayout container;
         public ViewHolder(View itemView) {
             super(itemView);
             wordText = (TextView) itemView.findViewById(R.id.wordCard);
+            container = (RelativeLayout) itemView.findViewById(R.id.card_layout);
+        }
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
         }
     }
 }
