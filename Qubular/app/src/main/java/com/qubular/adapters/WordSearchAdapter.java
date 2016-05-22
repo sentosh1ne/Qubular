@@ -2,6 +2,7 @@ package com.qubular.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -45,8 +47,10 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // TODO creation logic and on touch event + change layout itself
-        holder.wordText.setText(entries.get(position).foreign.lemma.toString());
-        setAnimation(holder.container,position);
+        holder.wordText.setText(entries.get(position).foreign.lemma.getString());
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(),"fonts/Bitter-Bold.otf");
+        holder.wordText.setTypeface(typeface);
+        setAnimation(holder.container, position);
 
     }
 
@@ -66,11 +70,13 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView wordText;
-        RelativeLayout container;
+        TextView equivalents;
+        LinearLayout container;
         public ViewHolder(View itemView) {
             super(itemView);
             wordText = (TextView) itemView.findViewById(R.id.wordCard);
-            container = (RelativeLayout) itemView.findViewById(R.id.card_layout);
+            equivalents = (TextView) itemView.findViewById(R.id.equivs);
+            container = (LinearLayout) itemView.findViewById(R.id.card_layout);
         }
     }
 

@@ -16,9 +16,11 @@ import General.Vocabulary;
  */
 public class LocalStorageRequestController {
 
+    private static Entry[] entries;
     public static Entry getEntry(Context context, int id) throws FileNotFoundException {
         JsonReader jsonReader = new JsonReader(new FileReader(context.getFilesDir() + "entries.json"));
         Vocabulary jsonElements = RequestController.gson.fromJson(jsonReader,Vocabulary.class);
+        entries = jsonElements.getEntries();
         Entry result = null;
         for (Entry entry : jsonElements.getEntries()){
             if (entry.id == id){
