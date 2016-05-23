@@ -1,6 +1,9 @@
 package com.qubular;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -39,33 +42,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        RequestController.getAllEntries(getApplicationContext());
+
 //        explanation = (TextView) findViewById(R.id.explanation);
 //        word = (TextView) findViewById(R.id.wordTitle);
 //        synonims = (TextView) findViewById(R.id.synonims);
         recyclerView = (RecyclerView) findViewById(R.id.main_recview);
-        RequestController.getAllEntries(getApplicationContext());
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Hello", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                try {
-                    Entry e = LocalStorageRequestController.getEntry(getApplicationContext(),1);
-//                    word.setText(e.foreign.lemma.getString());
-                    String synons = "(";
-                    for (NativeLexeme s : e.natives){
-                        synons += s.lemma.getString() + ",";
-                    }
-                    synons += ")";
-
-                   // synonims.setText(synons);
-                    String str = "";
-                    //for (Morpheme m: e.foreign.forms)
-
-                } catch (FileNotFoundException e1) {
-                    e1.printStackTrace();
-                }
 
                 Vocabulary voc = null;
                 try {
@@ -74,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 WordSearchAdapter.setupWordRecycler(recyclerView, Arrays.asList(voc.getEntries()),R.layout.wordcardlayout,getApplicationContext());
-
 
             }
         });
@@ -100,5 +89,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

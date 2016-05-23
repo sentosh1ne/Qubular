@@ -14,30 +14,6 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.12"
-        android:background="#67615e5e">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="7dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/searchBar"
-
-            android:background="@drawable/rounded_corner"
-            android:text="Search..."
-            android:textAlignment="center"
-            android:textColor="#191919"
-            >
-
-        </TextView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_weight="0.011">
 
         <android.support.v7.widget.RecyclerView

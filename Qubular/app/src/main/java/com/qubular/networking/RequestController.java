@@ -9,10 +9,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -41,15 +43,20 @@ public class RequestController {
                 if (response != null){} //TODO Request check
                 Log.i("RESPONDED",response.toString());
                 Vocabulary vocabulary = gson.fromJson(response.toString(),Vocabulary.class);
+                Log.i("ENTRIESRESPONSE", "onResponse: " + vocabulary.getEntries().length);
+                //check versions (we have 1 develop version - no reason to be in place
+//                if (local != null && vocabulary != null && !(vocabulary.version.equals(local.version))){}
                 try {
-                    try (Writer writer = new FileWriter(context.getFilesDir() + "entries.json")) {
+                    try (Writer writer = new FileWriter(context.getFilesDir() + "/entries.json")) {
                         Gson localg = new GsonBuilder().create();
                         localg.toJson(vocabulary, writer);
+
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Log.i("ENTRYYO",vocabulary.toString());
+                Log.i("ENTRYYO",vocabulary.getEntries()[0].foreign.lemma.getString());
 
             }
         }, new Response.ErrorListener() {
