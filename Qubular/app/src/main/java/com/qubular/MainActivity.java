@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.qubular.adapters.WordSearchAdapter;
 import com.qubular.networking.LocalStorageRequestController;
 import com.qubular.networking.RequestController;
+import com.qubular.util.DataUtils;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -80,6 +81,40 @@ public class MainActivity extends AppCompatActivity {
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                try {
+                    Entry[] entries = LocalStorageRequestController.getVocabulary(getApplicationContext()).getEntries();
+                    WordSearchAdapter.setupWordRecycler(recyclerView,
+                            DataUtils.searchForeign(entries,query),
+                                    R.layout.wordcardlayout,
+                                    getApplicationContext());
+                    return true;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                try {
+                    Entry[] entries = LocalStorageRequestController.getVocabulary(getApplicationContext()).getEntries();
+                    WordSearchAdapter.setupWordRecycler(recyclerView,
+                            DataUtils.searchForeign(entries,newText),
+                            R.layout.wordcardlayout,
+                            getApplicationContext());
+                    return true;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+
+                }
+                return false;
+            }
+        });
         return true;
     }
 
