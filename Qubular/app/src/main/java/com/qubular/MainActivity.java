@@ -55,23 +55,7 @@ public class MainActivity extends AppCompatActivity {
 //        synonims = (TextView) findViewById(R.id.synonims);
         recyclerView = (RecyclerView) findViewById(R.id.main_recview);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Hello", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
-                Vocabulary voc = null;
-                try {
-                    voc = LocalStorageRequestController.getVocabulary(getApplicationContext());
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                WordSearchAdapter.setupWordRecycler(recyclerView, Arrays.asList(voc.getEntries()),R.layout.wordcardlayout,getApplicationContext());
-
-            }
-        });
     }
 
     @Override

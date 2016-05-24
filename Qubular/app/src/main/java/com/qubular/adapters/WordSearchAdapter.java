@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qubular.R;
+import com.qubular.util.DataUtils;
 import com.qubular.util.DividerItemDecoration;
 
 import java.util.List;
@@ -47,8 +48,14 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // TODO creation logic and on touch event + change layout itself
+        Entry entry = entries.get(position);
+        int color = DataUtils.getUiColor(entry);
+        holder.circle.setBackgroundColor(color);
         holder.wordText.setText(entries.get(position).foreign.lemma.getString());
+        holder.equivalents.setText(DataUtils.getFormsString(entry));
         Typeface typeface = Typeface.createFromAsset(context.getAssets(),"fonts/Bitter-Bold.otf");
+        Typeface typeFaceEquivs = Typeface.createFromAsset(context.getAssets(), "fonts/Bitter-BoldItalic.otf");
+        holder.equivalents.setTypeface(typeFaceEquivs);
         holder.wordText.setTypeface(typeface);
         setAnimation(holder.container, position);
 
@@ -72,11 +79,13 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
         TextView wordText;
         TextView equivalents;
         LinearLayout container;
+        View circle;
         public ViewHolder(View itemView) {
             super(itemView);
             wordText = (TextView) itemView.findViewById(R.id.wordCard);
             equivalents = (TextView) itemView.findViewById(R.id.equivs);
             container = (LinearLayout) itemView.findViewById(R.id.card_layout);
+            circle = itemView.findViewById(R.id.circle);
         }
     }
 
