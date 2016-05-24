@@ -1,6 +1,8 @@
 package com.qubular.util;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import Morpheme.Morpheme;
  * Created by sentosh1ne on 23.05.2016.
  */
 public class DataUtils {
+
     public static List<Entry> searchForeign(Entry[] entries,String lemma){
         List<Entry> result = new ArrayList<>();
         for (Entry e : entries ){
@@ -48,6 +51,25 @@ public class DataUtils {
         return  result;
     }
 
+
+    public static String getFormattedString(String[] strings){
+        String result = "";
+        for (String m : strings){
+            result = result.concat(m + ",");
+        }
+        result = result.substring(0,result.length() - 1);
+        return  result;
+    }
+
+    public static String getFormsString(Morpheme[] morphemes){
+        String result = "";
+        for (Morpheme m : morphemes){
+            result = result.concat(m.getString() + ",");
+        }
+        result = result.substring(0,result.length() - 1);
+        return  result;
+    }
+
     public static String[] getNativeStrings(NativeLexeme[] natives){
         String[] result = new String[natives.length];
         int i = 0;
@@ -56,5 +78,10 @@ public class DataUtils {
             i++;
         }
         return result;
+    }
+
+    public static void setUpTextView(TextView textView, String text, Typeface typeface){
+        textView.setText(text);
+        textView.setTypeface(typeface);
     }
 }

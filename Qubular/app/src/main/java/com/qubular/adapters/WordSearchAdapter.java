@@ -49,13 +49,19 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         // TODO creation logic and on touch event + change layout itself
         final Entry entry = entries.get(position);
+
         int color = DataUtils.getUiColor(entry);
+
         holder.circle.setBackgroundColor(color);
+
         holder.wordText.setText(entries.get(position).foreign.lemma.getString());
+
         holder.equivalents.setText(DataUtils.getFormsString(entry));
-        Typeface typeface = Typeface.createFromAsset(context.getAssets(),"fonts/Bitter-Bold.otf");
-        Typeface typeFaceEquivs = Typeface.createFromAsset(context.getAssets(), "fonts/Bitter-BoldItalic.otf");
+
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(),"fonts/Bitter-Regular.otf");
+        Typeface typeFaceEquivs = Typeface.createFromAsset(context.getAssets(), "fonts/Bitter-Italic.otf");
         holder.equivalents.setTypeface(typeFaceEquivs);
+
         holder.wordText.setTypeface(typeface);
         setAnimation(holder.container, position);
 
@@ -63,10 +69,14 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DescriptionActivity.class);
+                intent.putExtra("lemma",entry.foreign.lemma.getString());
                 intent.putExtra("natives",DataUtils.getNativeStrings(entry.natives));
                 intent.putExtra("origin",entry.foreign.origin.getString());
                 intent.putExtra("meaning",entry.foreign.meaning);
                 intent.putExtra("forms",DataUtils.getFormsString(entry).split(","));
+                if (entry.user != null) {
+                    intent.putExtra("user",entry.user.userName);
+                }
                 context.startActivity(intent);
             }
         });

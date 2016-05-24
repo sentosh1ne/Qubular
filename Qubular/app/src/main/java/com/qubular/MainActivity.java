@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView explanation, word, synonims;
     RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
