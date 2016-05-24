@@ -10,7 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.qubular.networking.RequestController;
 import com.qubular.util.DataUtils;
+
+import General.Entry;
 
 public class DescriptionActivity extends AppCompatActivity {
 
@@ -30,25 +33,22 @@ public class DescriptionActivity extends AppCompatActivity {
         publisher = (TextView) findViewById(R.id.publisher);
         setSupportActionBar(toolbar);
 
+
         Typeface typefaceNormal = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/Bitter-Regular.otf");
         Typeface typefaceBold = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/Bitter-Bold.otf");
         Typeface typefaceItalic = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/Bitter-Italic.otf");
 
         Bundle bundle = this.getIntent().getExtras();
-        String lemmaString = (String) bundle.get("lemma");
-        String[] natives = (String[]) bundle.get("natives");
-        String originString = (String) bundle.get("origin");
-        String explanationString = (String) bundle.get("meaning");
-        String[] forms = (String[]) bundle.get("forms");
-        String userName = (String) bundle.get("user");
+        Entry entry = RequestController.gson.fromJson((String)bundle.get("entry"),Entry.class);
 
-
-        DataUtils.setUpTextView(lemma,lemmaString,typefaceBold);
-        DataUtils.setUpTextView(explanation,explanationString,typefaceNormal);
-        DataUtils.setUpTextView(origin,originString,typefaceBold);
-        DataUtils.setUpTextView(synonims,DataUtils.getFormattedString(forms),typefaceItalic);
-        if (userName != null) {
-            DataUtils.setUpTextView(publisher, userName, typefaceNormal);
+        DataUtils.setUpTextView(lemma,entry.foreign.lemma.getString(),typefaceBold);
+        DataUtils.setUpTextView(explanation,entry.foreign.meaning,typefaceNormal);
+        DataUtils.setUpTextView(origin,entry.foreign.origin.getString(),typefaceBold);
+        DataUtils.setUpTextView(synonims,DataUtils.getFormsString(entry),typefaceItalic);
+        if (entry.user != null) {
+            DataUtils.setUpTextView(publisher,entry.user.userName, typefaceNormal);
+        }else{
+            publisher.setText("placeholder");
         }
     }
 

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.qubular.DescriptionActivity;
 import com.qubular.R;
+import com.qubular.networking.RequestController;
 import com.qubular.util.DataUtils;
 import com.qubular.util.DividerItemDecoration;
 
@@ -69,14 +70,8 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DescriptionActivity.class);
-                intent.putExtra("lemma",entry.foreign.lemma.getString());
-                intent.putExtra("natives",DataUtils.getNativeStrings(entry.natives));
-                intent.putExtra("origin",entry.foreign.origin.getString());
-                intent.putExtra("meaning",entry.foreign.meaning);
-                intent.putExtra("forms",DataUtils.getFormsString(entry).split(","));
-                if (entry.user != null) {
-                    intent.putExtra("user",entry.user.userName);
-                }
+
+                intent.putExtra("entry",RequestController.gson.toJson(entry));
                 context.startActivity(intent);
             }
         });

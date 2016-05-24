@@ -7,7 +7,8 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.qubular.DescriptionActivity"
-    tools:showIn="@layout/activity_description">
+    tools:showIn="@layout/activity_description"
+    android:weightSum="1">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -18,9 +19,10 @@
         <View
             android:layout_width="29dp"
             android:layout_height="30dp"
-            android:background="@drawable/circle"
+            android:background="#030000"
             android:layout_marginRight="10dp"
-            android:id="@+id/circle_descr">
+            android:id="@+id/circle_descr"
+            android:layout_marginLeft="10dp">
 
         </View>
 
@@ -37,33 +39,40 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="89dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="0.27">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/synonims_descr" />
+            android:id="@+id/synonims_descr"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="7dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/explanation" />
+            android:id="@+id/explanation"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="7dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/origin" />
+            android:id="@+id/origin"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="7dp" />
 
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="289dp"
+        android:layout_height="wrap_content"
         android:id="@+id/descr_recyclerview">
 
     </android.support.v7.widget.RecyclerView>
