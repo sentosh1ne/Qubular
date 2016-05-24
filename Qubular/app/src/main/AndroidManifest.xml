@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DescriptioonActivity"
-            android:label="@string/title_activity_descriptioon"
+            android:name=".DescriptionActivity"
+            android:label="@string/title_activity_description"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

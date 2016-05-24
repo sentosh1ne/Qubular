@@ -7,6 +7,7 @@ import java.util.List;
 
 import General.Entry;
 import Lexeme.ForeignLexeme;
+import Lexeme.NativeLexeme;
 import Morpheme.Morpheme;
 
 /**
@@ -45,5 +46,15 @@ public class DataUtils {
         }
         result = result.substring(0,result.length() - 1);
         return  result;
+    }
+
+    public static String[] getNativeStrings(NativeLexeme[] natives){
+        String[] result = new String[natives.length];
+        int i = 0;
+        for (NativeLexeme n : natives){
+            result[i] = n.getLemma().getString();
+            i++;
+        }
+        return result;
     }
 }

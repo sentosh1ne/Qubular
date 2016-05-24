@@ -1,7 +1,7 @@
 package com.qubular.adapters;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.qubular.DescriptionActivity;
 import com.qubular.R;
 import com.qubular.util.DataUtils;
 import com.qubular.util.DividerItemDecoration;
@@ -48,7 +48,7 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // TODO creation logic and on touch event + change layout itself
-        Entry entry = entries.get(position);
+        final Entry entry = entries.get(position);
         int color = DataUtils.getUiColor(entry);
         holder.circle.setBackgroundColor(color);
         holder.wordText.setText(entries.get(position).foreign.lemma.getString());
@@ -58,6 +58,18 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
         holder.equivalents.setTypeface(typeFaceEquivs);
         holder.wordText.setTypeface(typeface);
         setAnimation(holder.container, position);
+
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DescriptionActivity.class);
+                intent.putExtra("natives",DataUtils.getNativeStrings(entry.natives));
+                intent.putExtra("origin",entry.foreign.origin.getString());
+                intent.putExtra("meaning",entry.foreign.meaning);
+                intent.putExtra("forms",DataUtils.getFormsString(entry).split(","));
+                context.startActivity(intent);
+            }
+        });
 
     }
 
