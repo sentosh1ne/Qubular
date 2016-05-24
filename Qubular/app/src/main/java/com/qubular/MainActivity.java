@@ -3,6 +3,7 @@ package com.qubular;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -39,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     TextView explanation, word, synonims;
     RecyclerView recyclerView;
-
+    public static Typeface typefaceNormal;
+    public static  Typeface typefaceBold;
+    public static  Typeface typefaceItalic ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
 //        synonims = (TextView) findViewById(R.id.synonims);
         recyclerView = (RecyclerView) findViewById(R.id.main_recview);
 
-
+        typefaceNormal = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/Bitter-Regular.otf");
+        typefaceBold = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/Bitter-Bold.otf");
+        typefaceItalic = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/Bitter-Italic.otf");
     }
 
     @Override

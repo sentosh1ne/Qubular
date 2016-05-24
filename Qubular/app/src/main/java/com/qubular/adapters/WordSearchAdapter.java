@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qubular.DescriptionActivity;
+import com.qubular.MainActivity;
 import com.qubular.R;
 import com.qubular.networking.RequestController;
 import com.qubular.util.DataUtils;
@@ -59,11 +60,9 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
 
         holder.equivalents.setText(DataUtils.getFormsString(entry));
 
-        Typeface typeface = Typeface.createFromAsset(context.getAssets(),"fonts/Bitter-Regular.otf");
-        Typeface typeFaceEquivs = Typeface.createFromAsset(context.getAssets(), "fonts/Bitter-Italic.otf");
-        holder.equivalents.setTypeface(typeFaceEquivs);
+        holder.equivalents.setTypeface(MainActivity.typefaceItalic);
 
-        holder.wordText.setTypeface(typeface);
+        holder.wordText.setTypeface(MainActivity.typefaceNormal);
         setAnimation(holder.container, position);
 
         holder.container.setOnClickListener(new View.OnClickListener() {

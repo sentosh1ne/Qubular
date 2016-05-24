@@ -42,6 +42,22 @@ public class DataUtils {
         return localColor.argb(255,0,0,0);
     }
 
+    public static int getUiColor(NativeLexeme nativeLexeme){
+        Color localColor = new Color();
+        switch (nativeLexeme.usage.getPriority()){
+            case 1:
+                return localColor.argb(255,63,195,128);
+            case 2:
+                return localColor.argb(255,245,215,110);
+            case 3:
+                return localColor.argb(255,211,84,0);
+            case 4:
+                return localColor.argb(255,128,0,0);
+        }
+        return localColor.argb(255,0,0,0);
+    }
+
+
     public static String getFormsString(Entry entry){
         String result = "";
         for (Morpheme m : entry.foreign.forms){
