@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.qubular.MainActivity;
 import com.qubular.R;
 import com.qubular.util.DataUtils;
 import com.qubular.util.DividerItemDecoration;
@@ -43,7 +44,8 @@ public class AlternativesAdapter extends RecyclerView.Adapter<AlternativesAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         NativeLexeme nativeLexeme = forms.get(position);
-        holder.lemma.setText(position + ". " + nativeLexeme.getLemma().getString());
+        holder.lemma.setText((position+1) + ". " + nativeLexeme.getLemma().getString());
+        holder.lemma.setTypeface(MainActivity.typefaceNormal);
         holder.indicator.setBackgroundColor(DataUtils.getUiColor(nativeLexeme));
     }
 

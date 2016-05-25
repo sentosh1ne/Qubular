@@ -19,7 +19,8 @@
         android:layout_height="30dp"
         android:background="@drawable/circle"
         android:layout_marginRight="10dp"
-        android:id="@+id/circle">
+        android:id="@+id/circle"
+        android:layout_marginTop="3dp">
 
     </View>
     <TextView

@@ -20,7 +20,7 @@ import General.Entry;
 
 public class DescriptionActivity extends AppCompatActivity {
 
-    TextView lemma,origin,synonims,explanation,publisher;
+    TextView lemma,origin,synonims,explanation,publisher,alts;
     RecyclerView recyclerView;
     View indicator;
 
@@ -37,6 +37,8 @@ public class DescriptionActivity extends AppCompatActivity {
         publisher = (TextView) findViewById(R.id.publisher);
         indicator = findViewById(R.id.circle_descr);
         recyclerView = (RecyclerView) findViewById(R.id.descr_recyclerview);
+        alts = (TextView) findViewById(R.id.alternatives_title);
+        alts.setTypeface(MainActivity.typefaceItalic);
         setSupportActionBar(toolbar);
 
 
@@ -47,12 +49,12 @@ public class DescriptionActivity extends AppCompatActivity {
 
         DataUtils.setUpTextView(lemma,entry.foreign.lemma.getString(),MainActivity.typefaceBold);
         DataUtils.setUpTextView(explanation,entry.foreign.meaning,MainActivity.typefaceNormal);
-        DataUtils.setUpTextView(origin,entry.foreign.origin.getString(),MainActivity.typefaceNormal);
+        DataUtils.setUpTextView(origin,"Origin: " + entry.foreign.origin.getString(),MainActivity.typefaceNormal);
         DataUtils.setUpTextView(synonims,DataUtils.getFormsString(entry),MainActivity.typefaceItalic);
-        if (entry.user != null) {
-            DataUtils.setUpTextView(publisher,entry.user.userName, MainActivity.typefaceNormal);
+        if (entry.author != null) {
+            DataUtils.setUpTextView(publisher,"Published by " + entry.author.getUsername(), MainActivity.typefaceNormal);
         }else{
-            publisher.setText("placeholder");
+            publisher.setText("");
         }
 
         AlternativesAdapter.setupRecycler(recyclerView, Arrays.asList(entry.natives),getApplicationContext(),R.layout.form_card);

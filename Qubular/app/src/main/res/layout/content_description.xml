@@ -22,7 +22,8 @@
             android:background="#030000"
             android:layout_marginRight="10dp"
             android:id="@+id/circle_descr"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp">
 
         </View>
 
@@ -38,9 +39,10 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="89dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="0.27">
+        android:layout_weight="0.05"
+        android:layout_marginBottom="7dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,8 +50,9 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/synonims_descr"
-            android:layout_marginLeft="42dp"
-            android:layout_marginTop="7dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,8 +60,9 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/explanation"
-            android:layout_marginLeft="42dp"
-            android:layout_marginTop="7dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -66,14 +70,24 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/origin"
-            android:layout_marginLeft="42dp"
-            android:layout_marginTop="7dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:textSize="20dp" />
 
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alternatives : "
+        android:id="@+id/alternatives_title"
+        android:textColor="#000000"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp" />
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/descr_recyclerview">
+        android:id="@+id/descr_recyclerview"
+        android:layout_marginTop="7dp">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -82,5 +96,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/publisher" />
+        android:id="@+id/publisher"
+        android:layout_marginTop="5dp" />
 </LinearLayout>
