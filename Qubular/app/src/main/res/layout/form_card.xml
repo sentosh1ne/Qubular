@@ -14,13 +14,13 @@
         android:textSize="20dp" />
 
     <View
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
         android:background="#030000"
         android:layout_marginRight="10dp"
         android:id="@+id/circle_form"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="18dp">
+        android:layout_marginTop="23dp">
 
     </View>
 </LinearLayout>

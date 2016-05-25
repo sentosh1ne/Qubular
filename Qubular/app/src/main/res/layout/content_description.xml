@@ -17,13 +17,13 @@
         android:layout_marginTop="15dp">
 
         <View
-            android:layout_width="29dp"
-            android:layout_height="30dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:background="#030000"
             android:layout_marginRight="10dp"
             android:id="@+id/circle_descr"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="3dp">
+            android:layout_marginTop="9.5dp">
 
         </View>
 
@@ -77,13 +77,14 @@
 
     </LinearLayout>
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Alternatives : "
+        android:text="Альтернативы:"
         android:id="@+id/alternatives_title"
         android:textColor="#000000"
         android:layout_marginLeft="10dp"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:background="#eae7e7" />
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
