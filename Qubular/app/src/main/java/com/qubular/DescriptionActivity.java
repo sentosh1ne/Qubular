@@ -50,7 +50,7 @@ public class DescriptionActivity extends AppCompatActivity {
         DataUtils.setUpTextView(lemma,DataUtils.capitalizeFirstLetter(entry.foreign.lemma.getString()),MainActivity.typefaceBold);
         DataUtils.setUpTextView(explanation,DataUtils.capitalizeFirstLetter(entry.foreign.meaning),MainActivity.typefaceNormal);
         DataUtils.setUpTextView(origin,"Origin: " + DataUtils.capitalizeFirstLetter(entry.foreign.origin.getString()),MainActivity.typefaceNormal);
-        DataUtils.setUpTextView(synonims,DataUtils.getFormsString(entry),MainActivity.typefaceItalic);
+        DataUtils.setUpTextView(synonims,DataUtils.capitalizeFirstLetter(DataUtils.getFormsString(entry)),MainActivity.typefaceItalic);
         if (entry.author != null) {
             DataUtils.setUpTextView(publisher,"Published by " + entry.author.getUsername(), MainActivity.typefaceNormal);
         }else{
