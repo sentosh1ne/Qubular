@@ -57,6 +57,7 @@ public class DescriptionActivity extends AppCompatActivity {
             publisher.setText("");
         }
 
+        setTitle(entry.foreign.lemma.getString());
         AlternativesAdapter.setupRecycler(recyclerView, Arrays.asList(entry.natives),getApplicationContext(),R.layout.form_card);
         indicator.setBackgroundColor(DataUtils.getUiColor(entry));
     }
