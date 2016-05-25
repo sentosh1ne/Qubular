@@ -44,7 +44,7 @@ public class AlternativesAdapter extends RecyclerView.Adapter<AlternativesAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         NativeLexeme nativeLexeme = forms.get(position);
-        holder.lemma.setText((position+1) + ". " + nativeLexeme.getLemma().getString());
+        holder.lemma.setText((position+1) + ". " + DataUtils.capitalizeFirstLetter(nativeLexeme.getLemma().getString()));
         holder.lemma.setTypeface(MainActivity.typefaceNormal);
         holder.indicator.setBackgroundColor(DataUtils.getUiColor(nativeLexeme));
     }

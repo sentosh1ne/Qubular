@@ -47,9 +47,9 @@ public class DescriptionActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         Entry entry = RequestController.gson.fromJson((String)bundle.get("entry"),Entry.class);
 
-        DataUtils.setUpTextView(lemma,entry.foreign.lemma.getString(),MainActivity.typefaceBold);
-        DataUtils.setUpTextView(explanation,entry.foreign.meaning,MainActivity.typefaceNormal);
-        DataUtils.setUpTextView(origin,"Origin: " + entry.foreign.origin.getString(),MainActivity.typefaceNormal);
+        DataUtils.setUpTextView(lemma,DataUtils.capitalizeFirstLetter(entry.foreign.lemma.getString()),MainActivity.typefaceBold);
+        DataUtils.setUpTextView(explanation,DataUtils.capitalizeFirstLetter(entry.foreign.meaning),MainActivity.typefaceNormal);
+        DataUtils.setUpTextView(origin,"Origin: " + DataUtils.capitalizeFirstLetter(entry.foreign.origin.getString()),MainActivity.typefaceNormal);
         DataUtils.setUpTextView(synonims,DataUtils.getFormsString(entry),MainActivity.typefaceItalic);
         if (entry.author != null) {
             DataUtils.setUpTextView(publisher,"Published by " + entry.author.getUsername(), MainActivity.typefaceNormal);

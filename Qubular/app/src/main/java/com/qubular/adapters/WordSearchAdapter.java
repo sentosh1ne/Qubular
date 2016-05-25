@@ -56,7 +56,7 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
 
         holder.circle.setBackgroundColor(color);
 
-        holder.wordText.setText(entries.get(position).foreign.lemma.getString());
+        holder.wordText.setText(DataUtils.capitalizeFirstLetter(entries.get(position).foreign.lemma.getString()));
 
         holder.equivalents.setText(DataUtils.getFormsString(entry));
 
