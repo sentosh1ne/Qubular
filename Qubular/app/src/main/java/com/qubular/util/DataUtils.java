@@ -61,9 +61,9 @@ public class DataUtils {
     public static String getFormsString(Entry entry){
         String result = "";
         for (Morpheme m : entry.foreign.forms){
-            result = result.concat(m.getString() + ",");
+            result = result.concat(m.getString() + ", ");
         }
-        result = result.substring(0,result.length() - 1);
+        result = result.substring(0,result.length() - 2);
         return  result;
     }
 
@@ -85,9 +85,9 @@ public class DataUtils {
     public static String getFormsString(Morpheme[] morphemes){
         String result = "";
         for (Morpheme m : morphemes){
-            result = result.concat(m.getString() + ",");
+            result = result.concat(m.getString() + ", ");
         }
-        result = result.substring(0,result.length() - 1);
+        result = result.substring(0,result.length() - 2);
         return  result;
     }
 
